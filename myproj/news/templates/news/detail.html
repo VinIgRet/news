@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{item.title}} :: {{block.super}}
+{% endblock %}
+{% block sidebar %}
+{% include 'news/listcat.html' %}
+{% endblock %}
+
+{% block content %}
+  <div class="card m-1">
+      <div class="card-header">{{item.category}}</div>
+      <div class="row g-0">
+        <div class="col-md-3">
+          <img src="{{ item.photo.url }}" class="m-1 img-thumbnail" alt="">
+        </div>
+        <div class="col-md-9">
+          <div class="card-body">
+            <p class="card-text">{{item.content}}</p>
+        </div>
+        </div>
+      </div>
+      <div class="card-footer text-body-secondary">
+          {{item.created_at|date:"d.m.Y"}}
+      </div>
+  </div>
+{% endblock %}

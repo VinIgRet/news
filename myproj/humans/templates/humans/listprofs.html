@@ -1,0 +1,7 @@
+{% load humans_tag %}
+<div class="list-group m-1">
+    {% get_profs as profs %}
+    {% for i in profs %}
+    <a href="{{ i.get_absolute_url }}" class="list-group-item list-group-item-action">{{i.title}}</a>
+    {% endfor %}
+</div>

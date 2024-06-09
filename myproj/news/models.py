@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 # Create your models here.
 class News(models.Model):
@@ -17,11 +18,19 @@ class News(models.Model):
     category = models.ForeignKey('NewsCategory', on_delete=models.PROTECT,null=True,verbose_name='Категория') 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse_lazy('newsdetail', kwargs={'newsid': self.pk}) 
 
 class NewsCategory(models.Model):
     title = models.CharField(max_length=100,verbose_name='Название')
+
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse_lazy('catnews', kwargs={'catid': self.pk})
+    
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'

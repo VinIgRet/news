@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+  {{title}} :: {{block.super}}
+{% endblock %}
+{% block sidebar %}
+{% include 'humans/listprofs.html' %}
+{% endblock %}
+{% block content %} 
+  <div class="row">
+    <div class="col-md-3">
+    <a href="{% url 'addperson' %}" class="btn btn-primary">Добавить персону</a>
+    </div>
+  </div>
+  {% for i in humans %}
+    <div class="card m-1">
+      <div class="card-header">{{i.nicname}}</div>
+      <div class="row g-0">
+        <div class="col-md-1">
+          {% if i.avatar %}
+          <img src="{{ i.avatar.url }}" class="m-1 img-thumbnail" alt="">
+          {% else %}
+          <div style="display: flex; justify-content: center; line-height: 100px;">нет фото</div>
+          {% endif %}
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{ i.famil }} {{ i.name }} {{ i.otches }}</h5>
+            <a href="{{ i.get_absolute_url }}" class="btn btn-primary">Смотреть</a>
+        </div>
+        </div>
+      </div>
+      <div class="card-footer text-body-secondary">
+        <a href="{{ i.profession.get_absolute_url }}">{{i.profession}}</a>
+      </div>
+  </div>
+  {% endfor %}      
+{% endblock %}

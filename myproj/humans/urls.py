@@ -1,6 +1,9 @@
 from django.urls import path
-from humans.views import index
+from .views import index,getprof,gethumans,addperson
 
 urlpatterns = [
-    path('', index),
+    path('', index, name='allhumans'),
+    path('prof/<int:profid>', getprof, name='profhumans'),
+    path('humans/<int:humansid>', gethumans, name='humansdetail'),
+    path("humans/add", addperson, name="addperson"),
 ]

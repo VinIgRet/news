@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{title}} :: {{block.super}}
+{% endblock %}
+{% block sidebar %}
+{% include 'humans/listprofs.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="card m-1">
+    <div class="card-header">{{item.nicname}}</div>
+    <div class="row g-0">
+        {% if item.avatar %}
+        <div class="col-md-4">
+        <img src="{{ item.avatar.url }}" class="m-1 img-thumbnail" alt="">
+      </div>
+      {% endif %}
+      <div class="col-md-8">
+        <div class="card-body">
+          <div class="card-title"><b>{{ item.famil }}</b></div>
+          <div class="card-title"><b>{{ item.name }}</b></div>
+          <div class="card-title"><b>{{ item.otches }}</b></div>
+          <p class="card-text">Профессия: <a href="{{item.profession.get_absolute_url}}">{{item.profession}}</a></p>
+          <p class="card-text">Дата рождения: {{ item.birthday|date:"d.m.Y" }}</p>
+          <p class="card-text">Пол: {% if item.ismale %}Мужской{% else %}Женский{% endif %}</p>
+      </div>
+      </div>
+    </div>
+{% endblock %}

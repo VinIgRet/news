@@ -5,7 +5,6 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('', include('news.urls')),
     path('admin/', admin.site.urls),
     path('news/', include('news.urls')),
     path('humans/', include('humans.urls')),

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{title}} :: {{block.super}}
+{% endblock %}
+{% block sidebar %}
+{% include 'news/listcat.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-3">
+  <a href="{% url 'addnews' %}" class="btn btn-primary">Добавить новость</a>
+  </div>
+</div>
+  {% for i in news %}
+  <div class="card m-1">
+      <div class="card-header">{{ forloop.counter }}. {{i.category}}</div>
+      <div class="row g-0">
+        <div class="col-md-2">
+          <img src="{{ i.photo.url }}" class="m-1 img-thumbnail" alt="">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title {% cycle 'text-succes' 'text-danger' %}">{{i.title}}</h5>
+            <p class="card-text">{{i.content|truncatewords:30|linebreaks}}</p>
+            <a href="{{ i.get_absolute_url }}" class="btn btn-primary">Смотреть</a> 
+        </div>
+        </div>
+      </div>
+      <div class="card-footer text-body-secondary">
+          {{i.created_at|date:"d.m.Y"}}
+      </div>
+  </div>
+  {% endfor %}
+{% endblock %}
